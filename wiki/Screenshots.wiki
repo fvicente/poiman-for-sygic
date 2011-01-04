@@ -1,0 +1,5 @@
+POIMan for Sygic screenshots
+
+= Introduction =
+
+Some screenshots for the POIMan application, running in the Android emulator.
