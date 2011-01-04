@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:focusable="true"
+    android:clickable="true"
+    android:background="@android:drawable/list_selector_background"
+    >
+<ImageView android:id="@+id/maplist_selected" android:src="@drawable/some_selected_off" android:paddingLeft="5px"  android:paddingRight="6px" android:layout_gravity="center_vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:focusable="false" android:clickable="false"></ImageView>
+<TextView android:id="@+id/maplist_text" android:singleLine="true" android:focusableInTouchMode="true" android:focusable="true" android:ellipsize="marquee" android:layout_gravity="center_vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="20dip"></TextView>
+<LinearLayout
+   	android:orientation="horizontal"
+   	android:layout_width="fill_parent"
+   	android:layout_height="wrap_content"
+   	android:gravity="right" >
+	<ImageView android:src="@drawable/expander_ic_minimized" android:paddingRight="4px" android:layout_gravity="center_vertical" android:gravity="right" android:layout_width="31px" android:layout_height="wrap_content" android:focusable="false" android:clickable="false"></ImageView>
+</LinearLayout>
+</LinearLayout>
