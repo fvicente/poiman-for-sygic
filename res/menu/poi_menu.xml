@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/menu_update_pois_group"
+          android:icon="@android:drawable/ic_menu_myplaces"
+          android:title="@string/update_pois_this_group" />
+    <item android:id="@+id/menu_select_pois"
+          android:icon="@android:drawable/ic_menu_agenda"
+          android:title="@string/select_all_pois" />
+    <item android:id="@+id/menu_apply"
+          android:icon="@android:drawable/ic_menu_save"
+          android:title="@string/apply_changes" />
+</menu>
