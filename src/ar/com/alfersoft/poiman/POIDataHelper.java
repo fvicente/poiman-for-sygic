@@ -127,7 +127,7 @@ public class POIDataHelper {
 	public void resetPOISelected(Activity activity, String dir) {
 		db.execSQL("UPDATE " + TABLE_NAME_POIS + " SET selected = 0 WHERE selected != 0");
 		// List of UPI files already installed
-		final File upis[] = POIUtil.listFilesAsArray(new File(POIUtil.DIR_SYGIC_ROOT + "/" + dir), new FilenameFilter() {
+		final File upis[] = POIUtil.listFilesAsArray(new File(POIUtil.getRootDir() + POIUtil.DIR_SYGIC + "/" + dir), new FilenameFilter() {
 			public boolean accept(File dir, String filename) {
 				return filename.toLowerCase().endsWith(".upi");
 			}

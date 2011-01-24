@@ -61,4 +61,5 @@
     <string name="map_dir_title">Maps Directory</string>
     <string name="map_dir_summary">Define Sygic directory used to store your maps</string>
     <string name="sygic_dir_not_found">Sygic maps directory not found! Install Sygic before running this application.</string>
+    <string name="aura_not_supported">Sorry! Sygic Aura is not supported yet.</string>
 </resources>
