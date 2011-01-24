@@ -213,20 +213,20 @@ public class POI implements Comparable<POI> {
 	public boolean update(String dir) {
 		boolean rc = false;
 		try {
-			String dest = POIUtil.DIR_SYGIC_ROOT + "/" + dir;
+			String dest = POIUtil.getRootDir() + POIUtil.DIR_SYGIC + "/" + dir;
 			// Extract image name from URL
 			String imageName = "";
 			final String splittedBmp[] = image.getFile().split("/");
 			if (splittedBmp != null && splittedBmp.length > 0) {
 				imageName = splittedBmp[splittedBmp.length - 1];
 			}
-			final String bmpDest = POIUtil.DIR_SYGIC_ICON_ROOT + "/" + imageName;
+			final String bmpDest = POIUtil.getRootDir() + POIUtil.DIR_SYGIC_ICON + "/" + imageName;
 			final String splitted[] = url.getFile().split("/");
 			// Check for valid URL (we expect the .ov2 extension at the end)
 			if (splitted != null && splitted.length > 0 && splitted[splitted.length - 1].toLowerCase().endsWith(".ov2")) {
 				final String basename = splitted[splitted.length - 1].substring(0, splitted[splitted.length - 1].length() - 4);
 				// Download the POI file
-				final String poiTmp = POIUtil.DIR_POIMAN_ROOT + "/" + basename + ".ov2.tmp";
+				final String poiTmp = POIUtil.getRootDir() + POIUtil.DIR_POIMAN + "/" + basename + ".ov2.tmp";
 				final URLConnection conn = url.openConnection();
 				final int size = conn.getContentLength();
 				final int rcDownload = POIUtil.downloadFile(conn, size, poiTmp, null);
@@ -237,7 +237,7 @@ public class POI implements Comparable<POI> {
 					POIUtil.tryToDelete(poiTmp);
 					// Try to download the image, won't return false on error
 					if (rc && imageName != "") {
-						final String bmpTmp = POIUtil.DIR_POIMAN_ROOT + "/" + basename + ".bmp.tmp";
+						final String bmpTmp = POIUtil.getRootDir() + POIUtil.DIR_POIMAN + "/" + basename + ".bmp.tmp";
 						final URLConnection connBmp = image.openConnection();
 						final int sizeBmp = connBmp.getContentLength();
 						final int rcBmp = POIUtil.downloadFile(connBmp, sizeBmp, bmpTmp, null);
@@ -267,13 +267,13 @@ public class POI implements Comparable<POI> {
 	 */
 	public boolean remove(String dir) {
 		boolean rc = false;
-		String dest = POIUtil.DIR_SYGIC_ROOT + "/" + dir;
+		String dest = POIUtil.getRootDir() + POIUtil.DIR_SYGIC + "/" + dir;
 		// Extract image name from URL
 		String imageName = "";
 		final String splittedBmp[] = image.getFile().split("/");
 		if (splittedBmp != null && splittedBmp.length > 0) {
 			imageName = splittedBmp[splittedBmp.length - 1];
-			final String bmpDest = POIUtil.DIR_SYGIC_ICON_ROOT + "/" + imageName;
+			final String bmpDest = POIUtil.getRootDir() + POIUtil.DIR_SYGIC_ICON + "/" + imageName;
 			POIUtil.tryToDelete(bmpDest);
 		}
 		final String splitted[] = url.getFile().split("/");

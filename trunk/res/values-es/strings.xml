@@ -61,4 +61,5 @@
     <string name="map_dir_title">Directorio de Mapas</string>
     <string name="map_dir_summary">Definir directorio de Sygic donde se encuentran sus mapas</string>
     <string name="sygic_dir_not_found">Directório de mapas de Sygic no encontrado. Instale Sygic antes de ejecutar esta aplicación.</string>
+    <string name="aura_not_supported">¡Lo sentimos! Este programa no es compatible con Sygic Aura.</string>
 </resources>

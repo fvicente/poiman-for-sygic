@@ -26,6 +26,7 @@ import android.content.Intent;
 import android.content.SharedPreferences.Editor;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.util.Xml;
 import android.view.LayoutInflater;
@@ -47,7 +48,7 @@ public class POIActivity extends Activity {
 
 	static private final int RC_CHOOSE_GROUPS = 0x1000;
 	static private final int RC_PREFERENCES = 0x1001;
-	public static final String POIS_FILE = POIUtil.DIR_POIMAN_ROOT + "/pois.xml";
+	public static final String POIS_FILE = POIUtil.getRootDir() + POIUtil.DIR_POIMAN + "/pois.xml";
 	
 	private POIDataHelper dataHelper = null;
 	private HashMap<String, POIMap> maps = null;
@@ -60,7 +61,7 @@ public class POIActivity extends Activity {
 	 */
 	private void parseXML(File file, boolean clean) throws XmlPullParserException, IOException {
 		// List of UPI files already installed
-		final File upis[] = POIUtil.listFilesAsArray(new File(POIUtil.DIR_SYGIC_ROOT + "/" + getSharedPreferences("ar.com.alfersoft.poiman_preferences", 0).getString("maps_dir", "")), new FilenameFilter() {
+		final File upis[] = POIUtil.listFilesAsArray(new File(POIUtil.getRootDir() + POIUtil.DIR_SYGIC + "/" + getSharedPreferences("ar.com.alfersoft.poiman_preferences", 0).getString("maps_dir", "")), new FilenameFilter() {
 			public boolean accept(File dir, String filename) {
 				return filename.toLowerCase().endsWith(".upi");
 			}
@@ -409,12 +410,27 @@ public class POIActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final File sygicDir = new File(POIUtil.DIR_SYGIC_ROOT);
-        if (!sygicDir.exists() || !sygicDir.isDirectory()) {
+        // find root directory
+        boolean sygicFound = false, auraFound = false;
+        final String rootDirs[] = { "/sdcard", "/sdcard/external_sd", "/mnt/sdcard/external_sd", "/mnt/sdcard", Environment.getExternalStorageDirectory().toString() };
+        File sygicDir = new File("/sdcard" + POIUtil.DIR_SYGIC);
+        for (String root : rootDirs) {
+            sygicDir = new File(root + POIUtil.DIR_SYGIC);
+            if (sygicDir.exists() && sygicDir.isDirectory()) {
+            	sygicFound = true;
+            	POIUtil.setRootDir(root);
+            	break;
+            }
+            final File auraDir = new File(root + "/Aura" + POIUtil.DIR_SYGIC);
+            if (auraDir.exists() && auraDir.isDirectory()) {
+            	auraFound = true;
+            }
+        }
+        if (!sygicFound) {
 			final AlertDialog.Builder dlg = new AlertDialog.Builder(this)
 				.setIcon(android.R.drawable.ic_dialog_alert)
 				.setTitle(android.R.string.dialog_alert_title)
-				.setMessage(R.string.sygic_dir_not_found)
+				.setMessage((!auraFound) ? R.string.sygic_dir_not_found : R.string.aura_not_supported)
 				.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {
 						finish();
@@ -446,7 +462,7 @@ public class POIActivity extends Activity {
         	} else {
 		        dataHelper = new POIDataHelper(this);
 		        dataHelper.init();
-		    	(new File(POIUtil.DIR_POIMAN_ROOT)).mkdir();
+		    	(new File(POIUtil.getRootDir() + POIUtil.DIR_POIMAN)).mkdir();
 		    	final File file = new File(POIS_FILE);
 		    	if (!file.exists()) {
 		            this.setContentView(R.layout.main_no_pois);

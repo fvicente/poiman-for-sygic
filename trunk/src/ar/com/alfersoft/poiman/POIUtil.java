@@ -24,9 +24,18 @@ import android.util.Log;
 
 public class POIUtil {
 
-	public static final String DIR_SYGIC_ROOT = "/sdcard/Maps";
-	public static final String DIR_SYGIC_ICON_ROOT = "/sdcard/Res/icons";
-	public static final String DIR_POIMAN_ROOT = "/sdcard/POIMan";
+	private static String rootDir = "/sdcard";
+	public static String DIR_SYGIC = "/Maps";
+	public static String DIR_SYGIC_ICON = "/Res/icons";
+	public static String DIR_POIMAN = "/POIMan";
+
+	public static String getRootDir() {
+		return rootDir;
+	}
+
+	public static void setRootDir(String root) {
+		rootDir = root;
+	}
 
 	static public boolean tryToDelete(String file) {
 		final File tmp = new File(file);
