@@ -1,6 +1,7 @@
 package ar.com.alfersoft.poiman;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -137,11 +138,14 @@ public class POIDataHelper {
 			for (File f : upis) {
 				final String name = f.getName();
 				final int len = name.length();
-				Log.d("POIMan", "resetPOISelected -> " + name);
 				if (len > 4) {
-					final String stmt = "UPDATE " + TABLE_NAME_POIS + " SET selected = 1 WHERE url LIKE '%/" + name.substring(0, len - 4).replaceAll("_", ":_").replaceAll("%", ":%") + ".ov2%' ESCAPE ':'";
-					Log.d("POIMan", "Statement -> " + stmt);
-					db.execSQL(stmt);
+					final ContentValues values = new ContentValues();
+					values.put("selected", 1);
+					final int affectedRows = db.update(TABLE_NAME_POIS, values, "url LIKE '%/" + name.substring(0, len - 4).replaceAll("_", ":_").replaceAll("%", ":%") + ".ov2%' ESCAPE ':'", new String[] {});
+					if (affectedRows == 0) {
+						// maybe the name is defined by the description, let's try
+						final int rows = db.update(TABLE_NAME_POIS, values, "description = ?", new String[] { name.substring(0, len - 4).replaceAll(" ", "_") });
+					}
 				}
 			}
 		}

@@ -58,6 +58,12 @@
     <string name="poilist_url_title">URL de lista de PDIs</string>
     <string name="poilist_url_summary">Direccion usada para descargar la lista de PDIs</string>
     <string name="poilist_url_edit_title">Editar URL de lista de PDIs</string>
+    <string name="poilist_username_title">Nombre de usuario de PDIs</string>
+    <string name="poilist_username_summary">Nombre de usuario opcional para descargar PDIs</string>
+    <string name="poilist_username_edit_title">Editar usuario para descargar PDIs</string>
+    <string name="poilist_password_title">Contraseña de PDIs</string>
+    <string name="poilist_password_summary">Contraseña opcional para descargar PDIs</string>
+    <string name="poilist_password_edit_title">Editar contraseña para bajar PDIs</string>
     <string name="map_dir_title">Directorio de Mapas</string>
     <string name="map_dir_summary">Definir directorio de Sygic donde se encuentran sus mapas</string>
     <string name="sygic_dir_not_found">Directório de mapas de Sygic no encontrado. Instale Sygic antes de ejecutar esta aplicación.</string>

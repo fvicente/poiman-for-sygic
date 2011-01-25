@@ -83,7 +83,7 @@ public class POIActivity extends Activity {
 		final XmlPullParser parser = Xml.newPullParser();
 		final FileInputStream in = new FileInputStream(file);
 		parser.setInput(in, null);
-		String name = null, map = null, group = null, descr = null, note = null, url = null, img = null;
+		String name = null, map = null, group = null, descr = null, note = null, url = null, img = null, format = null;
 		if (clean) {
 			dataHelper.deleteAll();
 		}
@@ -109,11 +109,13 @@ public class POIActivity extends Activity {
 					url = parser.nextText();
 				} else if (name.equals("image")) {
 					img = parser.nextText();
+				} else if (name.equals("format")) {
+					format = parser.nextText();
 				}
 				break;
 			case XmlPullParser.END_TAG:
 				name = parser.getName();
-				if (name.equals("poi") && url != null && url.toLowerCase().endsWith(".ov2")) {
+				if (name.equals("poi") && url != null && (url.toLowerCase().contains(".ov2") || (format != null && format.equalsIgnoreCase("ov2")))) {
 					if (map == null || map.equals("")) {
 						map = res.getString(R.string.unnamed);
 					}
@@ -138,7 +140,7 @@ public class POIActivity extends Activity {
 						} else {
 							imgURL = new URL(img);
 						}
-						if (img.startsWith("/")) {
+						if (url.startsWith("/")) {
 							urlObj = new URL(source.getProtocol(), source.getHost(), source.getPort(), url);
 						} else {
 							urlObj = new URL(url);
@@ -153,6 +155,10 @@ public class POIActivity extends Activity {
 							String upi = "";
 							if (nameOv2.toLowerCase().endsWith(".ov2")) {
 								upi = nameOv2.substring(0, nameOv2.length() - 4);
+							} else {
+								// seems like the name is not on the URL, some providers
+								// give the file name on the description field
+								upi = descr.replaceAll(" ", "_").toLowerCase();
 							}
 							// Check if the upi exists in the Sygic map directory
 							final Boolean exists = upiNames.get(upi);

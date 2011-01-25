@@ -103,7 +103,9 @@ public class POIChooseActivity extends Activity {
 												progress.setMessage(String.format(res.getString(R.string.adding_poi), text));
 											}
 										});
-										rc = poi.update(getSharedPreferences("ar.com.alfersoft.poiman_preferences", 0).getString("maps_dir", ""));
+										rc = poi.update(getSharedPreferences("ar.com.alfersoft.poiman_preferences", 0).getString("maps_dir", ""),
+														getSharedPreferences("ar.com.alfersoft.poiman_preferences", 0).getString("username_preference", ""),
+														getSharedPreferences("ar.com.alfersoft.poiman_preferences", 0).getString("password_preference", ""));
 										if (!rc) {
 											new AlertDialog.Builder(self)
 												.setTitle(android.R.string.dialog_alert_title)
