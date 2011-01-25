@@ -6,12 +6,27 @@
 		android:key="maps_dir"
 		android:title="@string/map_dir_title"
 		android:summary="@string/map_dir_summary" />
-           
+
 	<EditTextPreference
 		android:key="poilist_preference"
 		android:defaultValue="@string/poilist_default_url"
 		android:title="@string/poilist_url_title"
 		android:summary="@string/poilist_url_summary"
 		android:dialogTitle="@string/poilist_url_edit_title" />
+
+	<EditTextPreference
+		android:key="username_preference"
+		android:defaultValue=""
+		android:title="@string/poilist_username_title"
+		android:summary="@string/poilist_username_summary"
+		android:dialogTitle="@string/poilist_username_edit_title" />
+
+	<EditTextPreference
+		android:key="password_preference"
+		android:defaultValue=""
+		android:title="@string/poilist_password_title"
+		android:summary="@string/poilist_password_summary"
+		android:dialogTitle="@string/poilist_password_edit_title"
+		android:password="true" />
 
 </PreferenceScreen>

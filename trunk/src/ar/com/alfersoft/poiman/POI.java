@@ -210,7 +210,7 @@ public class POI implements Comparable<POI> {
 	 * Download the OV2 POI file, convert it to Sygic format (UPI) and install it
 	 * @return true on success, otherwise false
 	 */
-	public boolean update(String dir) {
+	public boolean update(String dir, String username, String password) {
 		boolean rc = false;
 		try {
 			String dest = POIUtil.getRootDir() + POIUtil.DIR_SYGIC + "/" + dir;
@@ -222,16 +222,25 @@ public class POI implements Comparable<POI> {
 			}
 			final String bmpDest = POIUtil.getRootDir() + POIUtil.DIR_SYGIC_ICON + "/" + imageName;
 			final String splitted[] = url.getFile().split("/");
+			String basename = "";
 			// Check for valid URL (we expect the .ov2 extension at the end)
 			if (splitted != null && splitted.length > 0 && splitted[splitted.length - 1].toLowerCase().endsWith(".ov2")) {
-				final String basename = splitted[splitted.length - 1].substring(0, splitted[splitted.length - 1].length() - 4);
+				basename = splitted[splitted.length - 1].substring(0, splitted[splitted.length - 1].length() - 4);
+			} else if(description != null) {
+				// seems like the name is not on the URL, some providers
+				// give the file name on the description field
+				basename = description.replaceAll(" ", "_");
+			}
+			if (!basename.equals("")) {
 				// Download the POI file
 				final String poiTmp = POIUtil.getRootDir() + POIUtil.DIR_POIMAN + "/" + basename + ".ov2.tmp";
-				final URLConnection conn = url.openConnection();
+				final URL substUrl = new URL(url.toString().replaceAll("%Username%", username).replaceAll("%Password%", password));
+				Log.d("POIMan", "Trying to download -> " + url.toString());
+				final URLConnection conn = substUrl.openConnection();
 				final int size = conn.getContentLength();
 				final int rcDownload = POIUtil.downloadFile(conn, size, poiTmp, null);
 				if (rcDownload == 0) {
-					Log.d("POIMan", "POI downloaded -> " + url.toString());
+					Log.d("POIMan", "POI downloaded -> " + substUrl.toString());
 					// Convert to UPI
 					rc = convertOv2ToUpi(poiTmp, dest + "/" + basename + ".upi", basename.replace('_', ' '), imageName);
 					POIUtil.tryToDelete(poiTmp);
@@ -277,9 +286,16 @@ public class POI implements Comparable<POI> {
 			POIUtil.tryToDelete(bmpDest);
 		}
 		final String splitted[] = url.getFile().split("/");
+		String basename = "";
 		// Check for valid URL (we expect the .ov2 extension at the end)
 		if (splitted != null && splitted.length > 0 && splitted[splitted.length - 1].toLowerCase().endsWith(".ov2")) {
-			final String basename = splitted[splitted.length - 1].substring(0, splitted[splitted.length - 1].length() - 4);
+			basename = splitted[splitted.length - 1].substring(0, splitted[splitted.length - 1].length() - 4);
+		} else if(description != null) {
+			// seems like the name is not on the URL, some providers
+			// give the file name on the description field
+			basename = description.replaceAll(" ", "_");
+		}
+		if (!basename.equals("")) {
 			final String upi = dest + "/" + basename + ".upi";
 			rc = POIUtil.tryToDelete(upi);
 		}

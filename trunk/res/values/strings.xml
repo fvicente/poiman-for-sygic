@@ -58,6 +58,12 @@
     <string name="poilist_url_title">POI\'s list URL</string>
     <string name="poilist_url_summary">URL used to retrieve the POI\'s list</string>
     <string name="poilist_url_edit_title">Edit POI\'s list URL</string>
+    <string name="poilist_username_title">POI\'s user name</string>
+    <string name="poilist_username_summary">Optional user name for POI\'s download</string>
+    <string name="poilist_username_edit_title">Edit POI\'s download user name</string>
+    <string name="poilist_password_title">POI\'s password</string>
+    <string name="poilist_password_summary">Optional password for POI\'s download</string>
+    <string name="poilist_password_edit_title">Edit POI\'s download password</string>
     <string name="map_dir_title">Maps Directory</string>
     <string name="map_dir_summary">Define Sygic directory used to store your maps</string>
     <string name="sygic_dir_not_found">Sygic maps directory not found! Install Sygic before running this application.</string>
