@@ -1,4 +1,4 @@
-POIMan for Sygic screenshots
+#summary POIMan for Sygic screenshots
 
 = Introduction =
 
