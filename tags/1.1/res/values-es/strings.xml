@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">POIMan para Sygic</string>
+    <string name="msg_no_pois">Archivo de PDIs no encontrado!\nPara descargarlo ahora, toque aqui:</string>
+    <string name="download">Descargar</string>
+    <string name="confirm_download_poi_list">¿Descargar la lista de PDIs?</string>
+    <string name="clean_poi_list">Limpiar lista de PDIs</string>
+    <string name="unnamed">Sin nombre</string>
+    <string name="downloading">Descargando...</string>
+    <string name="updating_db">Actualizando Base de Datos...</string>
+    <string name="please_wait">Por favor espere</string>
+    <string name="download_pois">Descargar Lista de PDIs</string>
+    <string name="update_pois">Actualizar PDIs</string>
+    <string name="update_pois_this_map">Actualizar PDIs de este Mapa</string>
+    <string name="update_pois_this_group">Actualizar PDIs de este Grupo</string>
+    <string name="quit">Salir</string>
+    <string name="no_pois">No hay PDIs disponibles</string>
+    <string name="no_maps">No hay Mapas disponibles</string>
+    <string name="no_groups">No hay Grupos disponibles</string>
+    <string name="pois">Seleccione los PDIs:</string>
+    <string name="maps">Seleccione un Mapa:</string>
+    <string name="groups">Seleccione un Grupo:</string>
+    <string name="select_all_pois">Marcar todos los PDIs</string>
+    <string name="deselect_all_pois">Desmarcar todos los PDIs</string>
+    <string name="apply_changes">Aplicar Cambios</string>
+    <string name="apply">Aplicar</string>
+    <string name="dont_apply">No Aplicar</string>
+    <plurals name="to_add">
+        <item quantity="one">Un PDI será agregado</item>
+        <item quantity="other">%d PDIs serán agregados</item>
+    </plurals>
+    <plurals name="to_remove">
+        <item quantity="one">Un PDI será eliminado</item>
+        <item quantity="other">%d PDIs serán eliminados</item>
+    </plurals>
+    <string name="confirm_apply">¿Aplicar cambios?</string>
+    <string name="applying_changes">Aplicando Cambios...</string>
+    <string name="adding_poi">Agregando PDI \'%s\'...</string>
+    <string name="removing_poi">Eliminando PDI \'%s\'...</string>
+    <string name="updating_poi">Actualizando POI \'%s\'...</string>
+    <string name="updating">Actualizando...</string>
+    <string name="no_pois_to_update">No hay PDIs seleccionados para actualizar</string>
+    <string name="download_error">Error descargando PDI, por favor intente nuevamente</string>
+    <string name="download_list_error">Error descargando lista de PDIs, por favor intente nuevamente</string>
+    <plurals name="to_update">
+        <item quantity="one">Un PDI será actualizado</item>
+        <item quantity="other">%d PDIs serán actualizados</item>
+    </plurals>
+    <string name="confirm_update">¿Actualizar todo?</string>
+    <string name="last_update">Ultima actualización: %s</string>
+    <string name="update">Actualizar</string>
+    <plurals name="updated">
+        <item quantity="one">El PDI fue actualizado exitosamente!</item>
+        <item quantity="other">Los %d PDIs fueron actualizados exitosamente!</item>
+    </plurals>
+    <string name="preferences">Ajustes</string>
+    <string name="poilist_default_url">http://www.todo-poi.es/TodoPOI.xml</string>
+    <string name="poilist_url_title">URL de lista de PDIs</string>
+    <string name="poilist_url_summary">Direccion usada para descargar la lista de PDIs</string>
+    <string name="poilist_url_edit_title">Editar URL de lista de PDIs</string>
+    <string name="poilist_username_title">Nombre de usuario de PDIs</string>
+    <string name="poilist_username_summary">Nombre de usuario opcional para descargar PDIs</string>
+    <string name="poilist_username_edit_title">Editar usuario para descargar PDIs</string>
+    <string name="poilist_password_title">Contraseña de PDIs</string>
+    <string name="poilist_password_summary">Contraseña opcional para descargar PDIs</string>
+    <string name="poilist_password_edit_title">Editar contraseña para bajar PDIs</string>
+    <string name="map_dir_title">Directorio de Mapas</string>
+    <string name="map_dir_summary">Definir directorio de Sygic donde se encuentran sus mapas</string>
+    <string name="sygic_dir_not_found">Directório de mapas de Sygic no encontrado. Instale Sygic antes de ejecutar esta aplicación.</string>
+    <string name="aura_not_supported">¡Lo sentimos! Este programa no es compatible con Sygic Aura.</string>
+</resources>
