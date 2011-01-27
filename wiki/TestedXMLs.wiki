@@ -10,4 +10,4 @@ In theory, you should be able to use any XML of this page http://www.poiedit.com
 
 This is the list of XML's already tested. If you have more to add please let me know.<br/>
   * http://www.todo-poi.es/TodoPOI.xml (Spain)
-  * http://www.flitspaal.nl/poi_flitspalen.xml (Netherlands) - This one requires to full-fill user name and password.
+  * http://www.flitspaal.nl/poi_flitspalen.xml (Netherlands) - This one requires to full-fill user name and password. The user name is the e-mail address used to register in the www.flitspaal.nl site.
