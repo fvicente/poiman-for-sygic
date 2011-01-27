@@ -1,4 +1,5 @@
 #summary POIMan for Sygic screenshots
+#labels POIMan,Sygic,screenshots
 
 = Introduction =
 
