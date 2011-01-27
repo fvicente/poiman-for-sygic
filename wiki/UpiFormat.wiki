@@ -8,7 +8,7 @@ One of the goals of POIMan for Sygic was converting the OV2 to UPI, in order to 
 
 = Differences between OV2 and UPI =
 
-  * All the strings in the UPI files seems to be stored as inverted wide chars. By inverted I mean that each character occupies 16 bits, but the byte order is swapped (I guess is like a little-endian wide char string). And all the strings are null-terminated (actually two null characters).
+  * All the strings in the UPI files seems to be stored as inverted wide chars. By inverted I mean that each character occupies 16 bits, but the byte order is swapped (I guess is like a little-endian wide char string). And all the strings are null-terminated (two null bytes).
   * There is a header in the UPI file. Contrarily to OV2 that starts directly with records, the UPI has a header and the format is the following:
     * First byte is the length of the POI file name (without extension) that will follow this byte including the null character (remember: everything multiplied by 2 since it is wide char)
     * A string with the name of the POI file without extension
