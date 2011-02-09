@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="about_title">About</string>
+    <string name="about_summary">About POIMan for Sygic</string>
+    <string name="about">POIMan for Sygic\nhttp://code.google.com/p/poiman-for-sygic\nDeveloped by:\nAlferSoft\n\nContributors:\nOleiros\n</string>
     <string name="app_name">POIMan for Sygic</string>
     <string name="msg_no_pois">POIs file not found!\nTo download it, click here:</string>
     <string name="download">Download</string>
@@ -68,4 +71,39 @@
     <string name="map_dir_summary">Define Sygic directory used to store your maps</string>
     <string name="sygic_dir_not_found">Sygic maps directory not found! Install Sygic before running this application.</string>
     <string name="aura_not_supported">Sorry! Sygic Aura is not supported yet.</string>
+    <string name="poiicon_default_size">27</string>
+	<string name="poiicon_size_title">POI\'s icon size</string>
+	<string name="poiicon_size_summary">Define the size (resizing) for the downloaded POI icons.</string>
+	<string name="poiicon_size_edit_title">Edit the POI\'s icons size</string>
+	<string-array name="poiicon_size_list_entries">
+		<item>27x27 (sygic\'s default)</item>
+		<item>32x32</item>
+		<item>42x42</item>
+		<item>52x52</item>
+		<item>64x64</item>
+		<item>96x96</item>
+		<item>128x128</item>
+	</string-array>
+	<string-array name="poiicon_size_list_values">
+		<item>27</item>
+		<item>32</item>
+		<item>42</item>
+		<item>52</item>
+		<item>64</item>
+		<item>96</item>
+		<item>128</item>
+	</string-array>
+	
+	<string name="poiicon_default_bpp">32</string>
+	<string name="poiicon_bpp_title">POI\'s icon pixel depth (bpp)</string>
+	<string name="poiicon_bpp_summary">Define the number of colors to use per pixel for the downloaded POI icons.</string>
+	<string name="poiicon_bpp_edit_title">Edit the POI\'s icons pixel depth</string>
+	<string-array name="poiicon_bpp_list_entries">
+		<item>8 bits (256 colors)</item>
+		<item>32 bits (sygic\'s default)</item>
+	</string-array>
+	<string-array name="poiicon_bpp_list_values">
+		<item>8</item>
+		<item>32</item>
+	</string-array>
 </resources>

@@ -3,6 +3,8 @@ package ar.com.alfersoft.poiman;
 import java.io.*;
 
 import android.graphics.Bitmap;
+import java.util.*;
+import java.util.Map.Entry;
 
 public class BMPFile {
 	// --- Private constants
@@ -29,11 +31,14 @@ public class BMPFile {
 	private int biClrImportant = 0;
 	// --- Bitmap raw data
 	private int bitmap[];
+	// --- Bitmap palette
+	private int palette[];
 	// --- File section
 	private BufferedOutputStream fo;
 
 	// --- Default constructor
-	public BMPFile() {
+	public BMPFile(int bitCount) {
+		biBitCount = bitCount;
 	}
 
 	public void saveBitmap(String parFilename, Bitmap parImage, int parWidth, int parHeight) {
@@ -55,27 +60,72 @@ public class BMPFile {
 	 */
 	private void save(Bitmap parImage, int parWidth, int parHeight) {
 		try {
-			convertImage(parImage, parWidth, parHeight);
+			// Get image pixels
+			bitmap = new int[parWidth * parHeight];
+			parImage.getPixels(bitmap, 0, parWidth, 0, 0, parWidth, parHeight);
+			// Get palette bits according to the image
+			calculatePalette();
+			// Recalculate header variables
+			biWidth = parWidth;
+			biHeight = parHeight;
+			biSizeImage = biWidth * biHeight;
+			bfOffBits = BITMAPFILEHEADER_SIZE + BITMAPINFOHEADER_SIZE + (palette.length * 4);
+			bfSize = BITMAPFILEHEADER_SIZE + BITMAPINFOHEADER_SIZE + (palette.length * 4)+ biSizeImage;
 			writeBitmapFileHeader();
 			writeBitmapInfoHeader();
+			writePalette();
 			writeBitmap();
 		} catch (Exception saveEx) {
 			saveEx.printStackTrace();
 		}
 	}
 
-	/*
-	 * convertImage converts the memory image to the bitmap format (BRG). It
-	 * also computes some information for the bitmap info header.
+	private void calculatePalette() {
+		// use HashMap for better performance
+		HashMap<Integer, Integer> colorWeight = new HashMap<Integer, Integer>(256);
+		for(int i = 0; i < bitmap.length; i++) {
+			if (!colorWeight.containsKey(bitmap[i]))
+				colorWeight.put(bitmap[i], 1);
+			else
+				colorWeight.put(bitmap[i], colorWeight.get(bitmap[i])+1);
+		}
+		// Sort hashtable by frequency of colors (greatest to lowest)
+		ArrayList<Entry<Integer, Integer>> list = new ArrayList<Entry<Integer, Integer>>(colorWeight.entrySet());
+		Collections.sort(list, new Comparator<Entry<Integer, Integer>>() {
+		            public int compare(Entry<Integer, Integer> e1, Entry<Integer, Integer> e2) {
+		               return  e2.getValue().compareTo(e1.getValue());
+		            }		
+		        });
+		// get color palette
+		int paletteColors = Math.min(list.size(), 256);
+		palette = new int[paletteColors];
+		for (int i=0; i < paletteColors; i++) {
+			palette[i] = list.get(i).getKey();
+		}		
+		biClrUsed = paletteColors;
+		biClrImportant = 0;
+	}
+	
+	/**
+	 * Write color palette
 	 */
-	private boolean convertImage(Bitmap parImage, int parWidth, int parHeight) {
-		bitmap = new int[parWidth * parHeight];
-		parImage.getPixels(bitmap, 0, parWidth, 0, 0, parWidth, parHeight);
-		biSizeImage = ((parWidth * parHeight) * 4);
-		bfSize = biSizeImage + BITMAPFILEHEADER_SIZE + BITMAPINFOHEADER_SIZE;
-		biWidth = parWidth;
-		biHeight = parHeight;
-		return (true);
+	private void writePalette() {
+		int colorARGB;
+		int j;		
+		byte bgra[] = new byte[4];		
+		try {
+			for (j = 0; j < palette.length; j++) {
+				colorARGB = palette[j];
+				bgra[3] = (byte) ((colorARGB >> 24) & 0xFF);	// Alpha
+				bgra[2] = (byte) ((colorARGB >> 16) & 0xFF);	// Red
+				bgra[1] = (byte) ((colorARGB >> 8) & 0xFF);		// Green
+				bgra[0] = (byte) (colorARGB & 0xFF);			// Blue
+				fo.write(bgra);
+			}
+		} catch (Exception wb) 
+		{
+			wb.printStackTrace();
+		}
 	}
 
 	/*

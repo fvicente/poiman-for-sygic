@@ -3,6 +3,7 @@ package ar.com.alfersoft.poiman;
 import java.io.File;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -11,7 +12,12 @@ import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
+import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
+import android.text.SpannableString;
+import android.text.method.LinkMovementMethod;
+import android.text.util.Linkify;
+import android.widget.TextView;
 
 public class PreferencesActivity extends PreferenceActivity {
 
@@ -47,10 +53,32 @@ public class PreferencesActivity extends PreferenceActivity {
 				}
 			});
 		}
+		final Preference about = (Preference)getPreferenceManager().findPreference("about_poiman");
+		if (about != null) {
+			final Activity self = this;
+			about.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+				@Override
+				public boolean onPreferenceClick(Preference preference) {
+					final TextView message = new TextView(self);
+					final SpannableString s = new SpannableString(self.getText(R.string.about));
+					Linkify.addLinks(s, Linkify.WEB_URLS);
+					message.setText(s);
+					message.setMovementMethod(LinkMovementMethod.getInstance());
+					message.setPadding(5, 0, 5, 0);
+					final AlertDialog.Builder dlg = new AlertDialog.Builder(self)
+						.setTitle(R.string.about_title)
+						.setPositiveButton(android.R.string.ok, null)
+						.setView(message);
+					dlg.show();
+					return false;
+				}
+			});
+		}
 	}
 
     static void show(Context context) {
 		final Intent intent = new Intent(context, PreferencesActivity.class);
+		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		context.startActivity(intent);
 	}
 }

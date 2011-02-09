@@ -158,7 +158,9 @@ public class POIUtil {
 									});
 									rc = poi.update(self.getSharedPreferences("ar.com.alfersoft.poiman_preferences", 0).getString("maps_dir", ""),
 													self.getSharedPreferences("ar.com.alfersoft.poiman_preferences", 0).getString("username_preference", ""),
-													self.getSharedPreferences("ar.com.alfersoft.poiman_preferences", 0).getString("password_preference", ""));
+													self.getSharedPreferences("ar.com.alfersoft.poiman_preferences", 0).getString("password_preference", ""),
+													Integer.valueOf(self.getSharedPreferences("ar.com.alfersoft.poiman_preferences", 0).getString("poiicon_size_preference", res.getString(R.string.poiicon_default_size))),
+													Integer.valueOf(self.getSharedPreferences("ar.com.alfersoft.poiman_preferences", 0).getString("poiicon_bpp_preference", res.getString(R.string.poiicon_default_bpp))));
 									if (!rc) {
 										new AlertDialog.Builder(self)
 											.setTitle(android.R.string.dialog_alert_title)

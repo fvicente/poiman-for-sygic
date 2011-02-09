@@ -210,7 +210,7 @@ public class POI implements Comparable<POI> {
 	 * Download the OV2 POI file, convert it to Sygic format (UPI) and install it
 	 * @return true on success, otherwise false
 	 */
-	public boolean update(String dir, String username, String password) {
+	public boolean update(String dir, String username, String password, int iIconSize, int iIconBPP) {
 		boolean rc = false;
 		try {
 			String dest = POIUtil.getRootDir() + POIUtil.DIR_SYGIC + "/" + dir;
@@ -253,9 +253,9 @@ public class POI implements Comparable<POI> {
 						if (rcBmp == 0) {
 					        final Bitmap bmp = BitmapFactory.decodeFile(bmpTmp);
 					        if (bmp != null) {
-					        	final Bitmap resizedBmp = Bitmap.createScaledBitmap(bmp, 27, 27, false);
-					        	final BMPFile outBmp = new BMPFile();
-					        	outBmp.saveBitmap(bmpDest, resizedBmp, 27, 27);
+					        	final Bitmap resizedBmp = Bitmap.createScaledBitmap(bmp, iIconSize, iIconSize, false);
+					        	final BMPFile outBmp = new BMPFile(iIconBPP);
+					        	outBmp.saveBitmap(bmpDest, resizedBmp, iIconSize, iIconSize);
 					        } else {
 					        	POIUtil.moveFile(bmpTmp, bmpDest);
 					        }

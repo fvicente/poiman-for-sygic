@@ -105,7 +105,9 @@ public class POIChooseActivity extends Activity {
 										});
 										rc = poi.update(getSharedPreferences("ar.com.alfersoft.poiman_preferences", 0).getString("maps_dir", ""),
 														getSharedPreferences("ar.com.alfersoft.poiman_preferences", 0).getString("username_preference", ""),
-														getSharedPreferences("ar.com.alfersoft.poiman_preferences", 0).getString("password_preference", ""));
+														getSharedPreferences("ar.com.alfersoft.poiman_preferences", 0).getString("password_preference", ""),
+														Integer.valueOf(getSharedPreferences("ar.com.alfersoft.poiman_preferences", 0).getString("poiicon_size_preference", res.getString(R.string.poiicon_default_size))),
+														Integer.valueOf(getSharedPreferences("ar.com.alfersoft.poiman_preferences", 0).getString("poiicon_bpp_preference", res.getString(R.string.poiicon_default_bpp))));
 										if (!rc) {
 											new AlertDialog.Builder(self)
 												.setTitle(android.R.string.dialog_alert_title)
