@@ -28,24 +28,29 @@
 		android:summary="@string/poilist_password_summary"
 		android:dialogTitle="@string/poilist_password_edit_title"
 		android:password="true" />
-
-	<ListPreference
-		android:key="poiicon_size_preference"
-        android:title="@string/poiicon_size_title"
-        android:summary="@string/poiicon_size_summary"
-        android:defaultValue="@string/poiicon_default_size"
-        android:entries="@array/poiicon_size_list_entries"
-        android:entryValues="@array/poiicon_size_list_values" 
-    />
-    
-    <ListPreference
-		android:key="poiicon_bpp_preference"
-        android:title="@string/poiicon_bpp_title"
-        android:summary="@string/poiicon_bpp_summary"
-        android:defaultValue="@string/poiicon_default_bpp"
-        android:entries="@array/poiicon_bpp_list_entries"
-        android:entryValues="@array/poiicon_bpp_list_values" 
-    />
+		
+	<PreferenceScreen
+			android:title="@string/poiicon_title"
+			android:summary="@string/poiicon_summary"
+		>
+		<ListPreference
+			android:key="poiicon_size_preference"
+	        android:title="@string/poiicon_size_title"
+	        android:summary="@string/poiicon_size_summary"
+	        android:defaultValue="@string/poiicon_default_size"
+	        android:entries="@array/poiicon_size_list_entries"
+	        android:entryValues="@array/poiicon_size_list_values" 
+	    />
+	    
+	    <ListPreference
+			android:key="poiicon_bpp_preference"
+	        android:title="@string/poiicon_bpp_title"
+	        android:summary="@string/poiicon_bpp_summary"
+	        android:defaultValue="@string/poiicon_default_bpp"
+	        android:entries="@array/poiicon_bpp_list_entries"
+	        android:entryValues="@array/poiicon_bpp_list_values" 
+	    />
+	</PreferenceScreen>
 
 	<Preference
 		android:negativeButtonText="@null"
