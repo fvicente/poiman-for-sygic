@@ -39,6 +39,9 @@ public class BMPFile {
 	// --- Default constructor
 	public BMPFile(int bitCount) {
 		biBitCount = bitCount;
+		if (biBitCount != 32 && biBitCount != 8) {
+			biBitCount = 32;
+		}
 	}
 
 	public void saveBitmap(String parFilename, Bitmap parImage, int parWidth, int parHeight) {
@@ -63,17 +66,21 @@ public class BMPFile {
 			// Get image pixels
 			bitmap = new int[parWidth * parHeight];
 			parImage.getPixels(bitmap, 0, parWidth, 0, 0, parWidth, parHeight);
-			// Get palette bits according to the image
-			calculatePalette();
 			// Recalculate header variables
 			biWidth = parWidth;
 			biHeight = parHeight;
 			biSizeImage = biWidth * biHeight;
-			bfOffBits = BITMAPFILEHEADER_SIZE + BITMAPINFOHEADER_SIZE + (palette.length * 4);
-			bfSize = BITMAPFILEHEADER_SIZE + BITMAPINFOHEADER_SIZE + (palette.length * 4)+ biSizeImage;
+			if (biBitCount == 8) {
+				// Get palette bits according to the image
+				calculatePalette();
+				bfOffBits = BITMAPFILEHEADER_SIZE + BITMAPINFOHEADER_SIZE + (palette.length * 4);
+				bfSize = BITMAPFILEHEADER_SIZE + BITMAPINFOHEADER_SIZE + (palette.length * 4) + biSizeImage;
+			}
 			writeBitmapFileHeader();
 			writeBitmapInfoHeader();
-			writePalette();
+			if (biBitCount == 8) {
+				writePalette();
+			}
 			writeBitmap();
 		} catch (Exception saveEx) {
 			saveEx.printStackTrace();
@@ -101,7 +108,7 @@ public class BMPFile {
 		palette = new int[paletteColors];
 		for (int i=0; i < paletteColors; i++) {
 			palette[i] = list.get(i).getKey();
-		}		
+		}
 		biClrUsed = paletteColors;
 		biClrImportant = 0;
 	}
@@ -135,7 +142,7 @@ public class BMPFile {
 	 * Each scan line must be padded to an even 4-byte boundary.
 	 */
 	private void writeBitmap() {
-		int size, value;
+		int size, value, pixelARGB;
 		int j;
 		int rowCount, rowIndex, lastRowIndex;
 		byte rgba[] = new byte[4];
@@ -146,12 +153,18 @@ public class BMPFile {
 		try {
 			for (j = 0; j < size; j++) {
 				rowIndex++;
-				value = bitmap[rowIndex];
-				rgba[0] = (byte) (value & 0xFF);
-				rgba[1] = (byte) ((value >> 8) & 0xFF);
-				rgba[2] = (byte) ((value >> 16) & 0xFF);
-				rgba[3] = (byte) ((value >> 24) & 0xFF);
-				fo.write(rgba);
+				if (biBitCount == 8) {
+					pixelARGB = bitmap[rowIndex];
+					// write the palette position of the nearest color
+					fo.write(getNearestColor(pixelARGB));
+				} else {
+					value = bitmap[rowIndex];
+					rgba[0] = (byte) (value & 0xFF);
+					rgba[1] = (byte) ((value >> 8) & 0xFF);
+					rgba[2] = (byte) ((value >> 16) & 0xFF);
+					rgba[3] = (byte) ((value >> 24) & 0xFF);
+					fo.write(rgba);
+				}
 				if (rowCount == biWidth) {
 					rowCount = 1;
 					rowIndex = lastRowIndex - biWidth;
@@ -162,6 +175,42 @@ public class BMPFile {
 		} catch (Exception wb) {
 			wb.printStackTrace();
 		}
+	}
+
+	/**
+	 * Return palette position of the nearest color for given pixel
+	 * @param pixelARGB
+	 * @return
+	 */
+	private byte getNearestColor(int pixelARGB) {
+		byte index = 0;
+		int minDiff = 0xFF;
+
+		for (int i = 0; i < palette.length; i++) {
+			// pixel color
+			byte bPixelBlue = (byte) ((pixelARGB) & 0xFF);
+			byte bPixelGreen = (byte) ((pixelARGB >> 8) & 0xFF);
+			byte bPixelRed = (byte) ((pixelARGB >> 16) & 0xFF);
+			
+			// palette colors
+			byte bPalRed = (byte) ((palette[i] >> 16) & 0xFF);	// Red
+			byte bPalGreen = (byte) ((palette[i] >> 8) & 0xFF);	// Green
+			byte bPalBlue = (byte) ((palette[i]) & 0xFF);		// Blue			
+
+			// Get difference between components ( red green blue )
+            // of given color and appropriate components of pallete color
+            int bDiff = (byte) Math.abs((int) bPalBlue - (int) bPixelBlue);
+            int gDiff = (byte) Math.abs((int) bPalGreen - (int) bPixelGreen);
+            int rDiff = (byte) Math.abs((int) bPalRed - (int) bPixelRed);
+
+            // Get max difference
+            int currentDiff = Math.max(Math.max(bDiff, gDiff),rDiff);
+            if (currentDiff < minDiff) {
+                minDiff = currentDiff;
+                index = (byte)i;
+            }
+        }
+		return index;
 	}
 
 	/*

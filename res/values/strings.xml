@@ -71,6 +71,8 @@
     <string name="map_dir_summary">Define Sygic directory used to store your maps</string>
     <string name="sygic_dir_not_found">Sygic maps directory not found! Install Sygic before running this application.</string>
     <string name="aura_not_supported">Sorry! Sygic Aura is not supported yet.</string>
+	<string name="poiicon_title">POI\'s icon options</string>
+	<string name="poiicon_summary">Manage POI\'s icon options</string>
     <string name="poiicon_default_size">27</string>
 	<string name="poiicon_size_title">POI\'s icon size</string>
 	<string name="poiicon_size_summary">Define the size (resizing) for the downloaded POI icons.</string>
