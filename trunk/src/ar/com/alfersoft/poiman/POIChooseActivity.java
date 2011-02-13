@@ -109,11 +109,15 @@ public class POIChooseActivity extends Activity {
 														Integer.valueOf(getSharedPreferences("ar.com.alfersoft.poiman_preferences", 0).getString("poiicon_size_preference", res.getString(R.string.poiicon_default_size))),
 														Integer.valueOf(getSharedPreferences("ar.com.alfersoft.poiman_preferences", 0).getString("poiicon_bpp_preference", res.getString(R.string.poiicon_default_bpp))));
 										if (!rc) {
-											new AlertDialog.Builder(self)
-												.setTitle(android.R.string.dialog_alert_title)
-												.setMessage(R.string.download_error)
-												.setPositiveButton(android.R.string.ok, null)
-												.show();
+											runOnUiThread(new Runnable() {
+												public void run() {
+													new AlertDialog.Builder(self)
+														.setTitle(android.R.string.dialog_alert_title)
+														.setMessage(R.string.download_error)
+														.setPositiveButton(android.R.string.ok, null)
+														.show();
+												}
+											});
 											break;
 										}
 										if (progress.isCanceled()) {
@@ -223,6 +227,8 @@ public class POIChooseActivity extends Activity {
 	    			final POI poi = array[position];
 	    			final TextView t = (TextView) convertView.findViewById(R.id.poi_text);
 					t.setText(poi.description);
+	    			final TextView s = (TextView) convertView.findViewById(R.id.poi_summary);
+					s.setText(poi.note);
 					final CheckBox c = (CheckBox) convertView.findViewById(R.id.poi_checkbox);
 					c.setChecked(poi.selected != 0);
 					c.setTag(poi);

@@ -2,7 +2,7 @@
 <resources>
     <string name="about_title">About</string>
     <string name="about_summary">About POIMan for Sygic</string>
-    <string name="about">POIMan for Sygic\nhttp://code.google.com/p/poiman-for-sygic\nDeveloped by:\nAlferSoft\n\nContributors:\nOleiros\n</string>
+    <string name="about">POIMan for Sygic\nhttp://code.google.com/p/poiman-for-sygic\nDeveloped by:\nAlferSoft (fvicente@gmail.com)\n\nContributors:\nRodrigoZR\nDaniel J. Fernández (danideviaje@gmail.com)\n</string>
     <string name="app_name">POIMan for Sygic</string>
     <string name="msg_no_pois">POIs file not found!\nTo download it, click here:</string>
     <string name="download">Download</string>
@@ -57,6 +57,8 @@
         <item quantity="other">The %d POIs were successfully updated!</item>
     </plurals>
     <string name="preferences">Preferences</string>
+	<string name="poisource_title">POI\'s list source</string>
+	<string name="poisource_summary">Manage POI\'s list source options</string>
     <string name="poilist_default_url">http://www.todo-poi.es/TodoPOI.xml</string>
     <string name="poilist_url_title">POI\'s list URL</string>
     <string name="poilist_url_summary">URL used to retrieve the POI\'s list</string>
