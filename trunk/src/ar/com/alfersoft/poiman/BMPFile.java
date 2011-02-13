@@ -8,17 +8,17 @@ import java.util.*;
 import java.util.Map.Entry;
 
 public class BMPFile {
-	// --- Private constants
+	// Private constants
 	private final static int BITMAPFILEHEADER_SIZE = 14;
 	private final static int BITMAPINFOHEADER_SIZE = 40;
-	// --- Private variable declaration
-	// --- Bitmap file header
+	// Private variable declaration
+	// Bitmap file header
 	private byte bfType[] = { 'B', 'M' };
 	private int bfSize = 0;
 	private int bfReserved1 = 0;
 	private int bfReserved2 = 0;
 	private int bfOffBits = BITMAPFILEHEADER_SIZE + BITMAPINFOHEADER_SIZE;
-	// --- Bitmap info header
+	// Bitmap info header
 	private int biSize = BITMAPINFOHEADER_SIZE;
 	private int biWidth = 0;
 	private int biHeight = 0;
@@ -30,15 +30,16 @@ public class BMPFile {
 	private int biYPelsPerMeter = 0x0;
 	private int biClrUsed = 0;
 	private int biClrImportant = 0;
-	// --- Bitmap raw data
+	// Bitmap raw data
 	private int bitmap[];
-	// --- Bitmap palette
+	// Bitmap palette
 	private int palette[];
-	// --- File section
+	// File section
 	private BufferedOutputStream fo;
+	// Hash of palette sorted by color
 	private HashMap<Integer, Integer> sortedPalette;
 
-	// --- Default constructor
+	// Default constructor
 	public BMPFile(int bitCount) {
 		biBitCount = bitCount;
 		if (biBitCount != 32 && biBitCount != 8) {
@@ -121,12 +122,11 @@ public class BMPFile {
 	 * Write color palette
 	 */
 	private void writePalette() {
-		int colorARGB;
-		int j;		
+		int j;
 		byte bgra[] = new byte[4];		
 		try {
 			for (j = 0; j < palette.length; j++) {
-				colorARGB = palette[j];
+				final int colorARGB = palette[j];
 				bgra[3] = (byte) ((colorARGB >> 24) & 0xFF);	// Alpha
 				bgra[2] = (byte) ((colorARGB >> 16) & 0xFF);	// Red
 				bgra[1] = (byte) ((colorARGB >> 8) & 0xFF);		// Green
@@ -145,35 +145,47 @@ public class BMPFile {
 	 * Each scan line must be padded to an even 4-byte boundary.
 	 */
 	private void writeBitmap() {
-		int size, value, pixelARGB;
-		int j;
+		int value, pixelARGB, j;
 		int rowCount, rowIndex, lastRowIndex;
-		byte rgba[] = new byte[4];
-		size = (biWidth * biHeight);
+
+		final int size = (biWidth * biHeight);
 		rowCount = 1;
 		rowIndex = size - biWidth - 1;
 		lastRowIndex = rowIndex;
 		try {
-			for (j = 0; j < size; j++) {
-				rowIndex++;
-				if (biBitCount == 8) {
+			// NOTE: do not try to 'optimize' putting this if inside the for clause
+			if (biBitCount == 8) {
+				// algorithm for 8 bits
+				for (j = 0; j < size; j++) {
+					rowIndex++;
 					pixelARGB = bitmap[rowIndex];
 					// write the palette position of the nearest color
 					fo.write(getNearestColor(pixelARGB));
-				} else {
+					if (rowCount == biWidth) {
+						rowCount = 1;
+						rowIndex = lastRowIndex - biWidth;
+						lastRowIndex = rowIndex;
+					} else
+						rowCount++;
+				}
+			} else {
+				byte rgba[] = new byte[4];
+				// algorithm for 32 bits
+				for (j = 0; j < size; j++) {
+					rowIndex++;
 					value = bitmap[rowIndex];
 					rgba[0] = (byte) (value & 0xFF);
 					rgba[1] = (byte) ((value >> 8) & 0xFF);
 					rgba[2] = (byte) ((value >> 16) & 0xFF);
 					rgba[3] = (byte) ((value >> 24) & 0xFF);
 					fo.write(rgba);
+					if (rowCount == biWidth) {
+						rowCount = 1;
+						rowIndex = lastRowIndex - biWidth;
+						lastRowIndex = rowIndex;
+					} else
+						rowCount++;
 				}
-				if (rowCount == biWidth) {
-					rowCount = 1;
-					rowIndex = lastRowIndex - biWidth;
-					lastRowIndex = rowIndex;
-				} else
-					rowCount++;
 			}
 		} catch (Exception wb) {
 			wb.printStackTrace();
@@ -181,7 +193,7 @@ public class BMPFile {
 	}
 
 	/**
-	 * Return palette position of the nearest color for given pixel
+	 * Return palette position of the nearest color for given pixel color
 	 * @param pixelARGB
 	 * @return
 	 */
