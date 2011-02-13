@@ -3,6 +3,7 @@ package ar.com.alfersoft.poiman;
 import java.io.*;
 
 import android.graphics.Bitmap;
+
 import java.util.*;
 import java.util.Map.Entry;
 
@@ -35,6 +36,7 @@ public class BMPFile {
 	private int palette[];
 	// --- File section
 	private BufferedOutputStream fo;
+	private HashMap<Integer, Integer> sortedPalette;
 
 	// --- Default constructor
 	public BMPFile(int bitCount) {
@@ -101,13 +103,15 @@ public class BMPFile {
 		Collections.sort(list, new Comparator<Entry<Integer, Integer>>() {
 		            public int compare(Entry<Integer, Integer> e1, Entry<Integer, Integer> e2) {
 		               return  e2.getValue().compareTo(e1.getValue());
-		            }		
+		            }
 		        });
 		// get color palette
 		int paletteColors = Math.min(list.size(), 256);
+		sortedPalette = new HashMap<Integer, Integer>();
 		palette = new int[paletteColors];
 		for (int i=0; i < paletteColors; i++) {
 			palette[i] = list.get(i).getKey();
+			sortedPalette.put(palette[i], i);
 		}
 		biClrUsed = paletteColors;
 		biClrImportant = 0;
@@ -129,8 +133,7 @@ public class BMPFile {
 				bgra[0] = (byte) (colorARGB & 0xFF);			// Blue
 				fo.write(bgra);
 			}
-		} catch (Exception wb) 
-		{
+		} catch (Exception wb) {
 			wb.printStackTrace();
 		}
 	}
@@ -183,31 +186,26 @@ public class BMPFile {
 	 * @return
 	 */
 	private byte getNearestColor(int pixelARGB) {
+		final Integer exact = sortedPalette.get(pixelARGB);
+		if (exact != null) {
+			return(exact.byteValue());
+		}
 		byte index = 0;
-		int minDiff = 0xFF;
+		int minDiff = 255*255 + 255*255 + 255*255 + 1;
 
 		for (int i = 0; i < palette.length; i++) {
-			// pixel color
-			byte bPixelBlue = (byte) ((pixelARGB) & 0xFF);
-			byte bPixelGreen = (byte) ((pixelARGB >> 8) & 0xFF);
-			byte bPixelRed = (byte) ((pixelARGB >> 16) & 0xFF);
-			
-			// palette colors
-			byte bPalRed = (byte) ((palette[i] >> 16) & 0xFF);	// Red
-			byte bPalGreen = (byte) ((palette[i] >> 8) & 0xFF);	// Green
-			byte bPalBlue = (byte) ((palette[i]) & 0xFF);		// Blue			
-
 			// Get difference between components ( red green blue )
-            // of given color and appropriate components of pallete color
-            int bDiff = (byte) Math.abs((int) bPalBlue - (int) bPixelBlue);
-            int gDiff = (byte) Math.abs((int) bPalGreen - (int) bPixelGreen);
-            int rDiff = (byte) Math.abs((int) bPalRed - (int) bPixelRed);
+            // of given color and appropriate components of palette color
+			final int bDiff = (byte) Math.abs((int) ((palette[i]) & 0xFF) - (int) ((pixelARGB) & 0xFF));
+			final int gDiff = (byte) Math.abs((int) ((palette[i] >> 8) & 0xFF) - (int) ((pixelARGB >> 8) & 0xFF));
+			final int rDiff = (byte) Math.abs((int) ((palette[i] >> 16) & 0xFF) - (int) ((pixelARGB >> 16) & 0xFF));
 
             // Get max difference
-            int currentDiff = Math.max(Math.max(bDiff, gDiff),rDiff);
+            final int currentDiff = bDiff*bDiff + gDiff*gDiff + rDiff*rDiff;
             if (currentDiff < minDiff) {
                 minDiff = currentDiff;
                 index = (byte)i;
+                if (minDiff == 0) break;                
             }
         }
 		return index;

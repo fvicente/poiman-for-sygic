@@ -48,7 +48,7 @@ public class POIActivity extends Activity {
 
 	static private final int RC_CHOOSE_GROUPS = 0x1000;
 	static private final int RC_PREFERENCES = 0x1001;
-	public static final String POIS_FILE = POIUtil.getRootDir() + POIUtil.DIR_POIMAN + "/pois.xml";
+	public static String POIS_FILE = POIUtil.getRootDir() + POIUtil.DIR_POIMAN + "/pois.xml";
 	
 	private POIDataHelper dataHelper = null;
 	private HashMap<String, POIMap> maps = null;
@@ -427,6 +427,14 @@ public class POIActivity extends Activity {
             	POIUtil.setRootDir(root);
             	break;
             }
+            // Check for alternative Sygic directory
+            final File sygicAltDir = new File(root + "/Sygic" + POIUtil.DIR_SYGIC);
+            if (sygicAltDir.exists() && sygicAltDir.isDirectory()) {
+            	sygicFound = true;
+            	POIUtil.setRootDir(root);
+            	POIUtil.DIR_SYGIC = "/Sygic" + POIUtil.DIR_SYGIC;
+            	break;
+            }
             final File auraDir = new File(root + "/Aura" + POIUtil.DIR_SYGIC);
             if (auraDir.exists() && auraDir.isDirectory()) {
             	auraFound = true;
@@ -445,6 +453,7 @@ public class POIActivity extends Activity {
 				});
 			dlg.show();
         } else {
+        	POIS_FILE = POIUtil.getRootDir() + POIUtil.DIR_POIMAN + "/pois.xml";
         	if (getSharedPreferences("ar.com.alfersoft.poiman_preferences", 0).getString("maps_dir", "").equals("")) {
     			final CharSequence[] dirs = POIUtil.listSubdirs(sygicDir);
     			final POIActivity self = this;

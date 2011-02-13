@@ -210,7 +210,7 @@ public class POI implements Comparable<POI> {
 	 * Download the OV2 POI file, convert it to Sygic format (UPI) and install it
 	 * @return true on success, otherwise false
 	 */
-	public boolean update(String dir, String username, String password, int iIconSize, int iIconBPP) {
+	public boolean update(String dir, String username, String password, int iconSize, int iconBPP) {
 		boolean rc = false;
 		try {
 			String dest = POIUtil.getRootDir() + POIUtil.DIR_SYGIC + "/" + dir;
@@ -253,9 +253,22 @@ public class POI implements Comparable<POI> {
 						if (rcBmp == 0) {
 					        final Bitmap bmp = BitmapFactory.decodeFile(bmpTmp);
 					        if (bmp != null) {
-					        	final Bitmap resizedBmp = Bitmap.createScaledBitmap(bmp, iIconSize, iIconSize, false);
-					        	final BMPFile outBmp = new BMPFile(iIconBPP);
-					        	outBmp.saveBitmap(bmpDest, resizedBmp, iIconSize, iIconSize);
+					        	int iconWidth = iconSize;
+					        	int iconHeight = iconSize;
+					        	final int width = bmp.getWidth();
+					        	final int height = bmp.getHeight();
+					        	if (width > 0 && height > 0 && width != height) {
+					        		// need to calculate proportional size
+					        		if (width > height) {
+					        			iconHeight = (int)((float)((float)iconSize / (float)width) * height);
+					        		} else {
+					        			// width < height
+					        			iconWidth = (int)((float)((float)iconSize / (float)height) * width);
+					        		}
+					        	}
+					        	final Bitmap resizedBmp = Bitmap.createScaledBitmap(bmp, iconWidth, iconHeight, false);
+					        	final BMPFile outBmp = new BMPFile(iconBPP);
+					        	outBmp.saveBitmap(bmpDest, resizedBmp, iconWidth, iconHeight);
 					        } else {
 					        	POIUtil.moveFile(bmpTmp, bmpDest);
 					        }
