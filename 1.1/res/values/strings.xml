@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">POIMan for Sygic</string>
+    <string name="msg_no_pois">POIs file not found!\nTo download it, click here:</string>
+    <string name="download">Download</string>
+    <string name="confirm_download_poi_list">Are you sure you want to download the POI list?</string>
+    <string name="clean_poi_list">Clean POI list</string>
+    <string name="unnamed">Unnamed</string>
+    <string name="downloading">Downloading...</string>
+    <string name="updating_db">Updating Database...</string>
+    <string name="please_wait">Please wait</string>
+    <string name="download_pois">Download POIs List</string>
+    <string name="update_pois">Update all POIs</string>
+    <string name="update_pois_this_map">Update POIs for this Map</string>
+    <string name="update_pois_this_group">Update POIs for this Group</string>
+    <string name="quit">Quit</string>
+    <string name="no_pois">No POIs available</string>
+    <string name="no_maps">No Maps available</string>
+    <string name="no_groups">No Groups available</string>
+    <string name="pois">Select the POIs:</string>
+    <string name="maps">Select a Map:</string>
+    <string name="groups">Select a Group:</string>
+    <string name="select_all_pois">Select all POIs</string>
+    <string name="deselect_all_pois">Deselect all POIs</string>
+    <string name="apply_changes">Apply Changes</string>
+    <string name="apply">Apply</string>
+    <string name="dont_apply">Don\'t Apply</string>
+    <plurals name="to_add">
+        <item quantity="one">One POI will be added</item>
+        <item quantity="other">%d POIs will be added</item>
+    </plurals>
+    <plurals name="to_remove">
+        <item quantity="one">One POI will be removed</item>
+        <item quantity="other">%d POIs will be removed</item>
+    </plurals>
+    <string name="confirm_apply">Are you sure you want to apply?</string>
+    <string name="applying_changes">Applying Changes...</string>
+    <string name="adding_poi">Adding POI \'%s\'...</string>
+    <string name="removing_poi">Removing POI \'%s\'...</string>
+    <string name="updating_poi">Updating POI \'%s\'...</string>
+    <string name="updating">Updating...</string>
+    <string name="no_pois_to_update">There are no POIs selected to update</string>
+    <string name="download_error">Error downloading POI, please try again later</string>
+    <string name="download_list_error">Error downloading POI\'s list, please try again later</string>
+    <plurals name="to_update">
+        <item quantity="one">One POI will be updated</item>
+        <item quantity="other">%d POIs will be updated</item>
+    </plurals>
+    <string name="confirm_update">Are you sure you want to update?</string>
+    <string name="last_update">Last update: %s</string>
+    <string name="update">Update</string>
+    <plurals name="updated">
+        <item quantity="one">The POI was successfully updated!</item>
+        <item quantity="other">The %d POIs were successfully updated!</item>
+    </plurals>
+    <string name="preferences">Preferences</string>
+    <string name="poilist_default_url">http://www.todo-poi.es/TodoPOI.xml</string>
+    <string name="poilist_url_title">POI\'s list URL</string>
+    <string name="poilist_url_summary">URL used to retrieve the POI\'s list</string>
+    <string name="poilist_url_edit_title">Edit POI\'s list URL</string>
+    <string name="poilist_username_title">POI\'s user name</string>
+    <string name="poilist_username_summary">Optional user name for POI\'s download</string>
+    <string name="poilist_username_edit_title">Edit POI\'s download user name</string>
+    <string name="poilist_password_title">POI\'s password</string>
+    <string name="poilist_password_summary">Optional password for POI\'s download</string>
+    <string name="poilist_password_edit_title">Edit POI\'s download password</string>
+    <string name="map_dir_title">Maps Directory</string>
+    <string name="map_dir_summary">Define Sygic directory used to store your maps</string>
+    <string name="sygic_dir_not_found">Sygic maps directory not found! Install Sygic before running this application.</string>
+    <string name="aura_not_supported">Sorry! Sygic Aura is not supported yet.</string>
+</resources>
