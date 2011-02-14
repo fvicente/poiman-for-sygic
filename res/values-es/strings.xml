@@ -75,7 +75,7 @@
     <string name="aura_not_supported">¡Lo sentimos! Este programa no es compatible con Sygic Aura.</string>
 	<string name="poiicon_title">Iconos de PDIs</string>
 	<string name="poiicon_summary">Ajustar opciones de iconos de PDIs</string>
-	<string name="poiicon_default_size">64</string>
+	<string name="poiicon_default_size">27</string>
 	<string name="poiicon_size_title">Tamaño icono PDIs</string>
 	<string name="poiicon_size_summary">Define el tamaño de los iconos de los PDIs descargados</string>
 	<string name="poiicon_size_edit_title">Editar tamaño icono PDIs descargados</string>
