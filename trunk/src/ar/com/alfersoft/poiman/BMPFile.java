@@ -17,10 +17,11 @@ public class BMPFile {
 	private int bfSize = 0;
 	private int bfReserved1 = 0;
 	private int bfReserved2 = 0;
-	private int bfOffBits = BITMAPFILEHEADER_SIZE + BITMAPINFOHEADER_SIZE;
+	private int bfOffBits = 0;
 	// Bitmap info header
 	private int biSize = BITMAPINFOHEADER_SIZE;
 	private int biWidth = 0;
+	private int biRowPadding = 0;
 	private int biHeight = 0;
 	private int biPlanes = 1;
 	private int biBitCount = 32;
@@ -72,12 +73,19 @@ public class BMPFile {
 			// Recalculate header variables
 			biWidth = parWidth;
 			biHeight = parHeight;
-			biSizeImage = biWidth * biHeight;
 			if (biBitCount == 8) {
 				// Get palette bits according to the image
 				calculatePalette();
 				bfOffBits = BITMAPFILEHEADER_SIZE + BITMAPINFOHEADER_SIZE + (palette.length * 4);
+				if ((biWidth % 4) > 0) {
+					biRowPadding = 4 - (biWidth % 4);
+				}
+				biSizeImage = (biWidth + biRowPadding) * biHeight;
 				bfSize = BITMAPFILEHEADER_SIZE + BITMAPINFOHEADER_SIZE + (palette.length * 4) + biSizeImage;
+			} else {
+				bfOffBits = BITMAPFILEHEADER_SIZE + BITMAPINFOHEADER_SIZE;
+				biSizeImage = (biWidth * biHeight) * 4;
+				bfSize = BITMAPFILEHEADER_SIZE + BITMAPINFOHEADER_SIZE + biSizeImage;
 			}
 			writeBitmapFileHeader();
 			writeBitmapInfoHeader();
@@ -145,7 +153,7 @@ public class BMPFile {
 	 * Each scan line must be padded to an even 4-byte boundary.
 	 */
 	private void writeBitmap() {
-		int value, pixelARGB, j;
+		int value, j, p;
 		int rowCount, rowIndex, lastRowIndex;
 
 		final int size = (biWidth * biHeight);
@@ -156,15 +164,22 @@ public class BMPFile {
 			// NOTE: do not try to 'optimize' putting this if inside the for clause
 			if (biBitCount == 8) {
 				// algorithm for 8 bits
+				byte rowPadding[] = {};
+				if (biRowPadding > 0) {
+					rowPadding = new byte[biRowPadding];
+					for (p = 0; p < biRowPadding; p++) rowPadding[p] = 0;
+				}
 				for (j = 0; j < size; j++) {
 					rowIndex++;
-					pixelARGB = bitmap[rowIndex];
 					// write the palette position of the nearest color
-					fo.write(getNearestColor(pixelARGB));
+					fo.write(getNearestColor(bitmap[rowIndex]));
 					if (rowCount == biWidth) {
 						rowCount = 1;
 						rowIndex = lastRowIndex - biWidth;
 						lastRowIndex = rowIndex;
+						if (biRowPadding > 0) {
+							fo.write(rowPadding);
+						}
 					} else
 						rowCount++;
 				}

@@ -57,11 +57,10 @@ public class PreferencesActivity extends PreferenceActivity {
 		if (about != null) {
 			final Activity self = this;
 			about.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-				@Override
 				public boolean onPreferenceClick(Preference preference) {
 					final TextView message = new TextView(self);
 					final SpannableString s = new SpannableString(self.getText(R.string.about));
-					Linkify.addLinks(s, Linkify.WEB_URLS);
+					Linkify.addLinks(s, Linkify.WEB_URLS | Linkify.EMAIL_ADDRESSES);
 					message.setText(s);
 					message.setMovementMethod(LinkMovementMethod.getInstance());
 					message.setPadding(5, 0, 5, 0);
