@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.0 r9654"
+   sodipodi:docname="dibujo.svg">
+  <defs
+     id="defs4">
+    <linearGradient
+       id="linearGradient3779">
+      <stop
+         style="stop-color:#c0289d;stop-opacity:1"
+         offset="0"
+         id="stop3803" />
+      <stop
+         id="stop3807"
+         offset="0.51049089"
+         style="stop-color:#941c7c;stop-opacity:1;" />
+      <stop
+         style="stop-color:#67115a;stop-opacity:1;"
+         offset="1"
+         id="stop3783" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3779"
+       id="linearGradient3815"
+       x1="680.93317"
+       y1="434.59393"
+       x2="681.32251"
+       y2="456.20105"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(60.892858,-2.1428571)" />
+    <filter
+       inkscape:collect="always"
+       id="filter3847"
+       x="-0.29011934"
+       width="1.5802387"
+       y="-0.6937636"
+       height="2.3875272">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="1.1872443"
+         id="feGaussianBlur3849" />
+    </filter>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3779"
+       id="linearGradient3859"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(60.892858,-2.1428571)"
+       x1="680.93317"
+       y1="434.59393"
+       x2="681.32251"
+       y2="456.20105" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.5"
+     inkscape:cx="764.16205"
+     inkscape:cy="434.3079"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:window-width="1280"
+     inkscape:window-height="908"
+     inkscape:window-x="0"
+     inkscape:window-y="24"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Capa 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       id="g3853"
+       transform="matrix(18.642276,0,0,18.642276,-13458.065,-7764.9276)"
+       inkscape:export-filename="/home/alfredo/Escritorio/1.png"
+       inkscape:export-xdpi="237.75"
+       inkscape:export-ydpi="237.75">
+      <path
+         transform="matrix(2.4391226,0,0,1.1603726,-1070.905,-74.664043)"
+         d="m 748.57142,463.16574 c 0,1.13416 -2.1986,2.05357 -4.91071,2.05357 -2.71212,0 -4.91072,-0.91941 -4.91072,-2.05357 0,-1.13416 2.1986,-2.05357 4.91072,-2.05357 2.71211,0 4.91071,0.91941 4.91071,2.05357 z"
+         sodipodi:ry="2.0535715"
+         sodipodi:rx="4.9107141"
+         sodipodi:cy="463.16574"
+         sodipodi:cx="743.66071"
+         id="path3833"
+         style="opacity:0.40357145;fill:#999999;fill-opacity:1;stroke:none;filter:url(#filter3847)"
+         sodipodi:type="arc" />
+      <g
+         id="g3829">
+        <path
+           sodipodi:nodetypes="ssscsss"
+           inkscape:connector-curvature="0"
+           id="path3005"
+           d="m 742.88134,423.69197 c -8.81734,0 -15.97955,7.23373 -15.97955,16.13914 0,5.17134 2.69775,10.20711 6.44968,13.16188 2.70917,2.13357 6.78386,5.12111 9.67115,10.25476 2.62916,-5.13715 6.46259,-8.00555 9.17826,-10.18008 3.69308,-2.95722 6.62502,-8.10476 6.62502,-13.23656 0,-8.90541 -7.12725,-16.13914 -15.94456,-16.13914 z"
+           style="fill:#c0d5c7;fill-opacity:1;stroke:none" />
+        <path
+           style="fill:url(#linearGradient3859);fill-opacity:1;stroke:none"
+           d="m 741.90102,458.79542 c -1.24019,-1.85368 -3.72476,-4.35821 -6.66207,-6.7156 -2.68734,-2.15677 -4.07179,-3.79425 -5.20198,-6.15275 -1.17398,-2.44986 -1.44298,-3.68595 -1.42436,-6.54526 0.0142,-2.18708 0.0665,-2.56444 0.56321,-4.06789 0.69339,-2.09872 1.72434,-3.83648 3.21095,-5.41236 1.97394,-2.09249 4.02382,-3.34028 6.78186,-4.12823 2.00109,-0.57169 5.4418,-0.56721 7.464,0.01 5.34899,1.52607 9.33513,5.89779 10.36408,11.36661 0.65133,3.46178 -0.16088,7.11477 -2.32611,10.46188 -1.07247,1.65787 -2.12104,2.76171 -4.28797,4.514 -3.20183,2.58915 -5.42059,4.98122 -6.77194,7.3009 -0.27178,0.46652 -0.54677,0.8455 -0.6111,0.84218 -0.0643,-0.003 -0.55868,-0.66626 -1.09857,-1.47321 z"
+           id="path3007"
+           inkscape:connector-curvature="0" />
+      </g>
+    </g>
+    <g
+       id="g3889"
+       transform="matrix(13.788573,13.550698,-13.550698,13.788573,-4311.9457,-15962.25)"
+       inkscape:export-filename="/home/alfredo/Escritorio/1.png"
+       inkscape:export-xdpi="237.75"
+       inkscape:export-ydpi="237.75">
+      <g
+         id="g3885">
+        <rect
+           y="425.31"
+           x="766.49585"
+           height="14.331539"
+           width="0.94702929"
+           id="rect3863"
+           style="fill:#ffffff;fill-opacity:1;stroke:none" />
+        <rect
+           style="fill:#ffffff;fill-opacity:1;stroke:none"
+           id="rect3865"
+           width="0.94702929"
+           height="14.331539"
+           x="768.93762"
+           y="425.31" />
+      </g>
+      <path
+         sodipodi:nodetypes="cccc"
+         inkscape:connector-curvature="0"
+         id="path3871"
+         d="m 767.60962,443.10868 0.57337,1.3787 0.58789,-1.3787 z"
+         style="fill:#ffffff;stroke:none" />
+      <path
+         sodipodi:nodetypes="ccccc"
+         inkscape:connector-curvature="0"
+         id="rect3876"
+         d="m 766.50273,424.15905 0,0.65345 3.375,0 0,-0.64787 c 0.0133,-1.12397 -3.37752,-1.10026 -3.375,-0.006 z"
+         style="fill:#ffffff;fill-opacity:1;stroke:none" />
+    </g>
+    <path
+       style="fill:#ffffff;stroke:none"
+       d="m 237.74061,272.29117 33.2731,18.84698 c 10.26555,17.67977 -6.02723,38.29645 -18.61432,35.59984 l -34.20391,-18.84697 -3.25756,4.18836 c 6.91574,24.96314 23.82969,38.61674 32.57515,43.04557 10.2264,5.40888 22.27322,4.26332 34.66923,1.86237 3.33436,0.51266 7.33256,0.75875 8.60919,2.09409 L 466.2936,515.81095 c 8.51356,10.39289 16.1239,20.95001 15.13679,33.07027 -0.26472,10.52525 1.58087,19.99478 10.03625,26.16015 14.06393,7.39428 28.12729,11.75676 55.61085,2.9617 l 0.32998,-2.13901 -28.46341,-15.30121 c -13.84302,-8.90467 -1.80271,-43.36585 11.51702,-39.32234 l 26.48917,14.97218 4.93592,1.64424 1.4802,-5.10034 c -5.88331,-10.95737 -7.62489,-19.98191 -25.83111,-36.69005 -7.40714,-5.64208 -18.29459,-4.3237 -29.12166,-3.12593 -13.90919,0.46419 -16.80471,-5.1915 -23.52768,-8.72011 L 317.0661,328.24689 c -3.62462,-5.03005 -7.5339,-9.20667 -9.04897,-20.56615 0.8128,-10.62106 -1.75983,-21.79134 -9.70721,-32.41221 -16.81497,-14.22629 -37.58563,-11.31046 -58.24333,-8.88473 z"
+       id="path3925"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccccccccccccccccccccccccc"
+       inkscape:export-filename="/home/alfredo/Escritorio/1.png"
+       inkscape:export-xdpi="237.75"
+       inkscape:export-ydpi="237.75" />
+  </g>
+</svg>
