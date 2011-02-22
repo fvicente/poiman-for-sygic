@@ -219,16 +219,31 @@ public class POIUtil {
 		dlg.show();
 	}
 
-	public static CharSequence[] listSubdirs(File directory) {
-		final Vector<CharSequence> dirs = new Vector<CharSequence>();
-		final File[] entries = directory.listFiles();
+	private static void readSubdirs(Vector<CharSequence> list, File baseDir, String entryName, int curLevel, int maxLevel) {
+		final File[] entries = (entryName.equals("")) ? baseDir.listFiles() : (new File(baseDir.getAbsolutePath() + File.separator + entryName)).listFiles();
 		if (entries != null) {
 			for (File entry : entries) {
 				if (entry.isDirectory()) {
-					dirs.add(entry.getName());
+					final String name = (entryName.equals("")) ? entry.getName() : (entryName + File.separator + entry.getName());
+					list.add(name);
+					if (maxLevel == -1 || ((maxLevel > 1) && (curLevel < maxLevel))) {
+						readSubdirs(list, baseDir, name, curLevel + 1, maxLevel);
+					}
 				}
 			}
 		}
+
+	}
+	/**
+	 * Retrieve list of subdirectories
+	 * 
+	 * @param directory  base directory
+	 * @param levels     number of in-depth directories to search or -1
+	 * @return
+	 */
+	public static CharSequence[] listSubdirs(File directory, int levels) {
+		final Vector<CharSequence> dirs = new Vector<CharSequence>();
+		readSubdirs(dirs, directory, "", 1, levels);
 		final int len = dirs.size();
 		if (len == 0) {
 			return null;
