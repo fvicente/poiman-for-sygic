@@ -29,7 +29,7 @@ public class PreferencesActivity extends PreferenceActivity {
 		final ListPreference list = (ListPreference)getPreferenceManager().findPreference("maps_dir");
 		if (list != null) {
 			final Resources res = this.getResources();
-			final CharSequence[] dirs = POIUtil.listSubdirs(new File(POIUtil.getRootDir() + POIUtil.DIR_SYGIC));
+			final CharSequence[] dirs = POIUtil.listSubdirs(new File(POIUtil.getRootDir() + POIUtil.DIR_SYGIC), -1);
 			list.setEntries(dirs);
 			list.setEntryValues(dirs);
 			list.setDefaultValue(getSharedPreferences("ar.com.alfersoft.poiman_preferences", 0).getString("maps_dir", ""));

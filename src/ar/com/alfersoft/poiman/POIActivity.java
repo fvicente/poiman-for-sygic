@@ -455,7 +455,7 @@ public class POIActivity extends Activity {
         } else {
         	POIS_FILE = POIUtil.getRootDir() + POIUtil.DIR_POIMAN + "/pois.xml";
         	if (getSharedPreferences("ar.com.alfersoft.poiman_preferences", 0).getString("maps_dir", "").equals("")) {
-    			final CharSequence[] dirs = POIUtil.listSubdirs(sygicDir);
+    			final CharSequence[] dirs = POIUtil.listSubdirs(sygicDir, 2);
     			final POIActivity self = this;
         		AlertDialog.Builder builder = new AlertDialog.Builder(this);
         		builder.setTitle(R.string.map_dir_title);
